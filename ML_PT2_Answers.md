@@ -155,66 +155,66 @@ Formula: $S_i = \sum (x - \mu_i)(x - \mu_i)^T$
     Sum of $x^2 = 1 + 1 + 1 + 0 + 1 = 4.0$
     Sum of $y^2 = 6.76 + 0.16 + 0.36 + 5.76 + 0.16 = 13.2$
     Sum of $xy = -2.6 - 0.4 + 0.6 + 0 + 0.4 = -2.0$
-    $S_1 = \begin{bmatrix} 4.0 & -2.0 \\ -2.0 & 13.2 \end{bmatrix}$
+    $$S_1 = \begin{bmatrix} 4.0 & -2.0 \\\\ -2.0 & 13.2 \end{bmatrix}$$
 
 *   **For X2 (Subtract 8.4 from X, 7.6 from Y):**
     $x-\mu_2 = \{(0.6, 2.4), (-2.4, 0.4), (0.6, -2.6), (-0.4, -0.6), (1.6, 0.4)\}$
     Sum of $x^2 = 9.2$, Sum of $y^2 = 13.2$, Sum of $xy = -0.2$
-    $S_2 = \begin{bmatrix} 9.2 & -0.2 \\ -0.2 & 13.2 \end{bmatrix}$
+    $$S_2 = \begin{bmatrix} 9.2 & -0.2 \\\\ -0.2 & 13.2 \end{bmatrix}$$
 
 **Step 3: Within-Class Scatter Matrix ($S_W$) and its Inverse**
-$S_W = S_1 + S_2 = \begin{bmatrix} 4.0+9.2 & -2.0-0.2 \\ -2.0-0.2 & 13.2+13.2 \end{bmatrix} = \mathbf{\begin{bmatrix} 13.2 & -2.2 \\ -2.2 & 26.4 \end{bmatrix}}$
+$$S_W = S_1 + S_2 = \begin{bmatrix} 4.0+9.2 & -2.0-0.2 \\\\ -2.0-0.2 & 13.2+13.2 \end{bmatrix} = \mathbf{\begin{bmatrix} 13.2 & -2.2 \\\\ -2.2 & 26.4 \end{bmatrix}}$$
 
 Determinant $|S_W| = (13.2 \times 26.4) - (-2.2 \times -2.2) = 348.48 - 4.84 = \mathbf{343.64}$
 
-$S_W^{-1} = \frac{1}{343.64} \begin{bmatrix} 26.4 & 2.2 \\ 2.2 & 13.2 \end{bmatrix}$
+$$S_W^{-1} = \frac{1}{343.64} \begin{bmatrix} 26.4 & 2.2 \\\\ 2.2 & 13.2 \end{bmatrix}$$
 
 **Step 4: Compute the Projection Vector ($w$)**
 $w = S_W^{-1} (\mu_1 - \mu_2)$
-$\mu_1 - \mu_2 = \begin{bmatrix} 3.0 - 8.4 \\ 3.6 - 7.6 \end{bmatrix} = \begin{bmatrix} -5.4 \\ -4.0 \end{bmatrix}$
+$$\mu_1 - \mu_2 = \begin{bmatrix} 3.0 - 8.4 \\\\ 3.6 - 7.6 \end{bmatrix} = \begin{bmatrix} -5.4 \\\\ -4.0 \end{bmatrix}$$
 
-$w = \frac{1}{343.64} \begin{bmatrix} 26.4 & 2.2 \\ 2.2 & 13.2 \end{bmatrix} \begin{bmatrix} -5.4 \\ -4.0 \end{bmatrix}$
-$w = \frac{1}{343.64} \begin{bmatrix} (26.4)(-5.4) + (2.2)(-4.0) \\ (2.2)(-5.4) + (13.2)(-4.0) \end{bmatrix} = \frac{1}{343.64} \begin{bmatrix} -151.36 \\ -64.68 \end{bmatrix}$
+$$w = \frac{1}{343.64} \begin{bmatrix} 26.4 & 2.2 \\\\ 2.2 & 13.2 \end{bmatrix} \begin{bmatrix} -5.4 \\\\ -4.0 \end{bmatrix}$$
+$$w = \frac{1}{343.64} \begin{bmatrix} (26.4)(-5.4) + (2.2)(-4.0) \\\\ (2.2)(-5.4) + (13.2)(-4.0) \end{bmatrix} = \frac{1}{343.64} \begin{bmatrix} -151.36 \\\\ -64.68 \end{bmatrix}$$
 
 **Final Answer:**
-Projection Vector $w = \mathbf{\begin{bmatrix} -0.440 \\ -0.188 \end{bmatrix}}$ 
+Projection Vector $$w = \mathbf{\begin{bmatrix} -0.440 \\\\ -0.188 \end{bmatrix}}$$ 
 *(Note: LDA directions can be scaled, so $[0.44, 0.188]$ is also valid).*
 
 ---
 
-### Q6) Find SVD for $A = \begin{bmatrix} 2 & 2 \\ -1 & 1 \end{bmatrix}$
+### Q6) Find SVD for $$A = \begin{bmatrix} 2 & 2 \\\\ -1 & 1 \end{bmatrix}$$
 
 Singular Value Decomposition breaks a matrix into $A = U \Sigma V^T$.
 
 **Step 1: Find $A^T A$**
-$A^T = \begin{bmatrix} 2 & -1 \\ 2 & 1 \end{bmatrix}$
-$A^T A = \begin{bmatrix} 2 & -1 \\ 2 & 1 \end{bmatrix} \begin{bmatrix} 2 & 2 \\ -1 & 1 \end{bmatrix} = \begin{bmatrix} 5 & 3 \\ 3 & 5 \end{bmatrix}$
+$$A^T = \begin{bmatrix} 2 & -1 \\\\ 2 & 1 \end{bmatrix}$$
+$$A^T A = \begin{bmatrix} 2 & -1 \\\\ 2 & 1 \end{bmatrix} \begin{bmatrix} 2 & 2 \\\\ -1 & 1 \end{bmatrix} = \begin{bmatrix} 5 & 3 \\\\ 3 & 5 \end{bmatrix}$$
 
 **Step 2: Find Eigenvalues ($\lambda$) and Singular Values ($\sigma$) of $A^T A$**
 $|A^T A - \lambda I| = 0 \implies (5-\lambda)^2 - 9 = 0 \implies \lambda^2 - 10\lambda + 16 = 0$
 Factors to: $(\lambda - 8)(\lambda - 2) = 0$.
 Eigenvalues: **$\lambda_1 = 8, \lambda_2 = 2$**.
 Singular Values (diagonal of $\Sigma$ matrix): **$\sigma_1 = \sqrt{8} = 2.828, \sigma_2 = \sqrt{2} = 1.414$**.
-$\Sigma = \begin{bmatrix} \sqrt{8} & 0 \\ 0 & \sqrt{2} \end{bmatrix}$
+$$\Sigma = \begin{bmatrix} \sqrt{8} & 0 \\\\ 0 & \sqrt{2} \end{bmatrix}$$
 
 **Step 3: Find Eigenvectors for $V$ matrix**
 For $\lambda_1 = 8$: $(5-8)x_1 + 3x_2 = 0 \implies -3x_1 + 3x_2 = 0 \implies x_1 = x_2$.
-Normalized vector $v_1 = \begin{bmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \end{bmatrix}$
+Normalized vector $$v_1 = \begin{bmatrix} 1/\sqrt{2} \\\\ 1/\sqrt{2} \end{bmatrix}$$
 
 For $\lambda_2 = 2$: $(5-2)x_1 + 3x_2 = 0 \implies 3x_1 + 3x_2 = 0 \implies x_1 = -x_2$.
-Normalized vector $v_2 = \begin{bmatrix} -1/\sqrt{2} \\ 1/\sqrt{2} \end{bmatrix}$
+Normalized vector $$v_2 = \begin{bmatrix} -1/\sqrt{2} \\\\ 1/\sqrt{2} \end{bmatrix}$$
 
-$V = \begin{bmatrix} 1/\sqrt{2} & -1/\sqrt{2} \\ 1/\sqrt{2} & 1/\sqrt{2} \end{bmatrix} \implies V^T = \begin{bmatrix} 1/\sqrt{2} & 1/\sqrt{2} \\ -1/\sqrt{2} & 1/\sqrt{2} \end{bmatrix}$
+$$V = \begin{bmatrix} 1/\sqrt{2} & -1/\sqrt{2} \\\\ 1/\sqrt{2} & 1/\sqrt{2} \end{bmatrix} \implies V^T = \begin{bmatrix} 1/\sqrt{2} & 1/\sqrt{2} \\\\ -1/\sqrt{2} & 1/\sqrt{2} \end{bmatrix}$$
 
 **Step 4: Find $U$ matrix**
 Use formula $u_i = \frac{1}{\sigma_i} A v_i$:
-$u_1 = \frac{1}{\sqrt{8}} \begin{bmatrix} 2 & 2 \\ -1 & 1 \end{bmatrix} \begin{bmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \end{bmatrix} = \frac{1}{\sqrt{16}} \begin{bmatrix} 4 \\ 0 \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$
-$u_2 = \frac{1}{\sqrt{2}} \begin{bmatrix} 2 & 2 \\ -1 & 1 \end{bmatrix} \begin{bmatrix} -1/\sqrt{2} \\ 1/\sqrt{2} \end{bmatrix} = \frac{1}{2} \begin{bmatrix} 0 \\ 2 \end{bmatrix} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$
+$$u_1 = \frac{1}{\sqrt{8}} \begin{bmatrix} 2 & 2 \\\\ -1 & 1 \end{bmatrix} \begin{bmatrix} 1/\sqrt{2} \\\\ 1/\sqrt{2} \end{bmatrix} = \frac{1}{\sqrt{16}} \begin{bmatrix} 4 \\\\ 0 \end{bmatrix} = \begin{bmatrix} 1 \\\\ 0 \end{bmatrix}$$
+$$u_2 = \frac{1}{\sqrt{2}} \begin{bmatrix} 2 & 2 \\\\ -1 & 1 \end{bmatrix} \begin{bmatrix} -1/\sqrt{2} \\\\ 1/\sqrt{2} \end{bmatrix} = \frac{1}{2} \begin{bmatrix} 0 \\\\ 2 \end{bmatrix} = \begin{bmatrix} 0 \\\\ 1 \end{bmatrix}$$
 
-$U = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$
+$$U = \begin{bmatrix} 1 & 0 \\\\ 0 & 1 \end{bmatrix}$$
 
 **Final Answer:**
-$A = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} \sqrt{8} & 0 \\ 0 & \sqrt{2} \end{bmatrix} \begin{bmatrix} 1/\sqrt{2} & 1/\sqrt{2} \\ -1/\sqrt{2} & 1/\sqrt{2} \end{bmatrix}$
+$$A = \begin{bmatrix} 1 & 0 \\\\ 0 & 1 \end{bmatrix} \begin{bmatrix} \sqrt{8} & 0 \\\\ 0 & \sqrt{2} \end{bmatrix} \begin{bmatrix} 1/\sqrt{2} & 1/\sqrt{2} \\\\ -1/\sqrt{2} & 1/\sqrt{2} \end{bmatrix}$$
 
 ---
 
@@ -304,7 +304,7 @@ $Cov(X,X) = \frac{\sum (X-\bar{X})^2}{n-1} = \frac{6.25 + 2.25 + 0.25 + 0.25 + 2
 $Cov(Y,Y) = \frac{\sum (Y-\bar{Y})^2}{n-1} = \frac{16 + 0 + 4 + 1 + 4 + 9}{5} = \frac{34}{5} = \mathbf{6.8}$
 $Cov(X,Y) = \frac{\sum (X-\bar{X})(Y-\bar{Y})}{n-1} = \frac{10 + 0 + 1 + 0.5 + 3 + 7.5}{5} = \frac{22}{5} = \mathbf{4.4}$
 
-Covariance Matrix $C = \mathbf{\begin{bmatrix} 3.5 & 4.4 \\ 4.4 & 6.8 \end{bmatrix}}$
+Covariance Matrix $$C = \mathbf{\begin{bmatrix} 3.5 & 4.4 \\\\ 4.4 & 6.8 \end{bmatrix}}$$
 
 **Step 3: Eigenvalues ($\lambda$)**
 $|C - \lambda I| = 0 \implies (3.5-\lambda)(6.8-\lambda) - (4.4)^2 = 0$
@@ -316,7 +316,7 @@ Using quadratic formula: $\lambda = \frac{10.3 \pm \sqrt{106.09 - 17.76}}{2} = \
 For max eigenvalue $\lambda_1 = 9.85$:
 $(3.5 - 9.85)x + 4.4y = 0 \implies -6.35x + 4.4y = 0 \implies x = 4.4, y = 6.35$
 Normalize vector $[4.4, 6.35]$ by dividing by magnitude ($\sqrt{4.4^2 + 6.35^2} \approx 7.73$):
-Eigenvector 1 = **$\begin{bmatrix} 0.569 \\ 0.821 \end{bmatrix}$**.
+Eigenvector 1 = **$$\begin{bmatrix} 0.569 \\\\ 0.821 \end{bmatrix}$$**.
 This is the **Principal Component** since it corresponds to the highest eigenvalue.
 
 ---
