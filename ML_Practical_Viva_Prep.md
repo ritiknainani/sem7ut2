@@ -2,7 +2,48 @@
 
 **Mumbai University | Sem 7 Computer Engineering | TSEC**
 
-> **Strategy:** 31 questions but they all use the SAME patterns. Learn 8 code templates below and you can solve ANY question from the paper. Every template is under 25 lines.
+> **Strategy:** 31 questions in the paper, but they all share the exact SAME underlying patterns. 
+> Use the **Master Question Index** below to instantly jump to your exact practical question number, or learn the **8 Core Templates** to solve any slip within 15 minutes!
+
+---
+
+## 📌 Master Question-to-Template Index (Q1 to Q31)
+
+Find your assigned practical slip number below:
+
+| Q# | Topic & Objective | Target Dataset | Core Template | What to Run / Specific Tweak |
+|:---:|:---|:---|:---:|:---|
+| **Q1** | Compare ad channels (individual, pairs, all) | Advertising | **Template 1** | Loop `['TV']`, `['Radio']`, `['TV','Radio']`, all |
+| **Q2** | Linear vs Polynomial Regression (degree 2) | Advertising | **Template 1** | `PolynomialFeatures(degree=2)` on TV column |
+| **Q3** | Evaluate Newspaper contribution & Adj R² | Advertising | **Template 1** | Fit with/without Newspaper; compute Adj R² |
+| **Q4** | Residual analysis & top 5 prediction errors | Advertising | **Template 1** | `(y_test - y_pred).abs().nlargest(5)` + scatter plot |
+| **Q5** | Effect of training data size (50%, 70%, 80%) | Advertising | **Template 1** | Loop `train_size in [0.5, 0.7, 0.8]` in `train_test_split` |
+| **Q6** | Compare Linear Reg, Decision Tree, Random Forest | Used Cars | **Template 2** | Fit all 3 regressors on same split, compare RMSE & R² |
+| **Q7** | Vehicle age derivation & KM driven impact | Used Cars | **Template 1 / 2** | `df['age'] = 2026 - df['year']`; train with/without age |
+| **Q8** | Hyperparameter tuning of Decision Tree | Used Cars | **Template 2** | `GridSearchCV(dt, {'max_depth': [3,5,10], ...})` |
+| **Q9** | Categorical encoding (Transmission, Owner) | Used Cars | **Template 2** | `pd.get_dummies()` vs `LabelEncoder()`, compare with baseline |
+| **Q10** | Outlier detection & handling using IQR | Used Cars | **Template 6** | `IQR = Q3-Q1; lower, upper = Q1-1.5*IQR, Q3+1.5*IQR` |
+| **Q11** | Feature importance ranking with Random Forest | Used Cars | **Template 2** | `rf.feature_importances_`, bar plot, retrain with top 3 |
+| **Q12** | Linear vs RBF Kernel SVM comparison | Social Ads | **Template 3** | `SVC(kernel='linear')` vs `SVC(kernel='rbf')` |
+| **Q13** | Effect of feature scaling on SVM | Social Ads | **Template 3** | Train SVM with `StandardScaler()` vs raw unscaled features |
+| **Q14** | SVM hyperparameter optimisation (C, gamma) | Social Ads | **Template 3** | `GridSearchCV(SVC(kernel='rbf'), {'C': [0.1, 1, 10], 'gamma': [0.01, 0.1, 1]})` |
+| **Q15** | Influence of Age alone vs Salary alone vs Both | Social Ads | **Template 3** | Train SVM on `['Age']`, `['EstimatedSalary']`, and both |
+| **Q16** | Decision boundary 2D contour visualisation | Social Ads | **Template 3** | `plt.contourf(xx, yy, Z)` meshgrid function |
+| **Q17** | Classification errors (False Positives/Negatives) | Social Ads | **Template 3** | `confusion_matrix` → extract FP=`cm[0,1]`, FN=`cm[1,0]` |
+| **Q18** | Nonlinear SVM vs Logistic Regression | Social Ads | **Template 3** | Compare `SVC(kernel='rbf')` and `LogisticRegression()` |
+| **Q19** | Decision Tree depth (2, 3, 4, 5) & Overfitting | Iris | **Template 4** | Loop `max_depth in [2, 3, 4, 5]`, plot train vs test accuracy |
+| **Q20** | Impurity criteria: Gini vs Entropy | Iris | **Template 4** | `DecisionTreeClassifier(criterion='gini')` vs `criterion='entropy'` |
+| **Q21** | Individual vs Ensemble (Bagging, RF, AdaBoost) | Iris | **Template 4** | Compare `DecisionTree`, `Bagging`, `RandomForest`, `AdaBoost` |
+| **Q22** | PCA with 2 vs 3 principal components | Iris | **Template 5** | `PCA(n_components=2)` and `PCA(n_components=3)` + SVM |
+| **Q23** | Classifiers before vs after PCA (95% variance) | Iris | **Template 5** | `PCA(n_components=0.95)`, compare SVM & LogReg before vs after |
+| **Q24** | Feature selection via Decision Tree importance | Iris | **Template 4** | Rank `dt.feature_importances_`, retrain using top 2 |
+| **Q25** | Misclassification between Iris species (Linear/RBF) | Iris | **Template 3 / 5** | Multiclass `confusion_matrix`, per-class precision/recall |
+| **Q26** | Linear Regression from scratch (Least Squares) | Advertising | **Template 7** | Closed-form slope/intercept or Normal Equation |
+| **Q27** | Multiple Linear Regression from scratch (Normal Eq) | Advertising | **Template 7** | $\theta = (X^T X)^{-1} X^T y$ on TV + Radio |
+| **Q28** | Gradient Descent for Linear Regression | Advertising | **Template 7** | $m -= lr \times dm, b -= lr \times db$, plot MSE cost curve |
+| **Q29** | Logistic Regression from scratch (Binary) | Social Ads | **Template 8** | Sigmoid + Binary Cross-Entropy + Gradient Descent |
+| **Q30** | Learning rate effect on Logistic Regression | Social Ads | **Template 8** | Test rates `[0.001, 0.01, 0.1]`, plot loss convergence |
+| **Q31** | Multiclass Logistic Regression from scratch | Iris | **Template 8** | Softmax + One-Hot encoding + Categorical Cross-Entropy |
 
 ---
 
@@ -432,6 +473,37 @@ for rate in [0.001, 0.01, 0.1]:
     plt.plot(loss_hist, label=f'lr={rate}')
 plt.legend(); plt.xlabel('Epoch'); plt.ylabel('Loss')
 plt.title('Learning Rate Effect'); plt.show()
+
+# ====== MULTICLASS LOGISTIC REGRESSION (SOFTMAX) FROM SCRATCH (Q31) ======
+from sklearn.datasets import load_iris
+from sklearn.metrics import f1_score
+
+X_iris, y_iris = load_iris(return_X_y=True)
+# One-hot encode 3 classes
+Y_onehot = np.eye(3)[y_iris]
+
+X_tr_i, X_te_i, Y_tr_i, Y_te_i, y_tr_orig, y_te_orig = train_test_split(
+    StandardScaler().fit_transform(X_iris), Y_onehot, y_iris, test_size=0.2, random_state=42, stratify=y_iris)
+
+def softmax(z):
+    exp_z = np.exp(z - np.max(z, axis=1, keepdims=True))
+    return exp_z / np.sum(exp_z, axis=1, keepdims=True)
+
+# Add bias
+X_tr_b = np.c_[np.ones(len(X_tr_i)), X_tr_i]
+X_te_b = np.c_[np.ones(len(X_te_i)), X_te_i]
+W = np.zeros((X_tr_b.shape[1], 3))  # shape: (n_features+1, n_classes)
+
+lr_s, epochs_s = 0.1, 1000
+for _ in range(epochs_s):
+    probs = softmax(X_tr_b @ W)
+    grad = (1 / len(X_tr_b)) * (X_tr_b.T @ (probs - Y_tr_i))
+    W -= lr_s * grad
+
+y_pred_iris = np.argmax(softmax(X_te_b @ W), axis=1)
+print("Iris Softmax Accuracy:", accuracy_score(y_te_orig, y_pred_iris))
+print("Iris Macro-F1:", f1_score(y_te_orig, y_pred_iris, average='macro'))
+print(confusion_matrix(y_te_orig, y_pred_iris))
 ```
 
 ---
